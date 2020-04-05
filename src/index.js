@@ -10,24 +10,33 @@ import ReactDOM from "react-dom";
 //Morning = red, Afternoon = green, Night = blue.
 
 const time = new Date();
-const timeOfDay = time.toLocaleString("en-US", {
-  hour: "numeric",
-  hour12: true
-});
-let message;
+
+const timeOfDay = time.getHours();
+
 console.log(timeOfDay);
 
-if (timeOfDay >= "12 AM" && timeOfDay <= "12 PM") {
+let message;
+
+let customStyle = {
+  color: ""
+};
+
+if (timeOfDay < 12) {
   message = "Good Morning";
-} else if (timeOfDay >= "12 PM" && timeOfDay <= "6 PM") {
+  customStyle.color = "red";
+} else if (timeOfDay < 18) {
   message = "Good Afternoon";
+  customStyle.color = "green";
 } else {
   message = "Good Night";
+  customStyle.color = "blue";
 }
 
 ReactDOM.render(
   <div>
-    <h1 className="heading">{message}</h1>
+    <h1 className="heading" style={customStyle}>
+      {message}
+    </h1>
   </div>,
   document.getElementById("root")
 );
