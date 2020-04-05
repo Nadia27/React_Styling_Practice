@@ -9,9 +9,25 @@ import ReactDOM from "react-dom";
 //Dynamically change the color of the h1 using inline css styles.
 //Morning = red, Afternoon = green, Night = blue.
 
+const time = new Date();
+const timeOfDay = time.toLocaleString("en-US", {
+  hour: "numeric",
+  hour12: true
+});
+let message;
+console.log(timeOfDay);
+
+if (timeOfDay >= "12 AM" && timeOfDay <= "12 PM") {
+  message = "Good Morning";
+} else if (timeOfDay >= "12 PM" && timeOfDay <= "6 PM") {
+  message = "Good Afternoon";
+} else {
+  message = "Good Night";
+}
+
 ReactDOM.render(
   <div>
-    <h1>Good Morning</h1>
+    <h1 className="heading">{message}</h1>
   </div>,
   document.getElementById("root")
 );
